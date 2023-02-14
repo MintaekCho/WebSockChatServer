@@ -25,9 +25,13 @@ public class WebSockChatHandler extends TextWebSocketHandler {
         log.info("payload : {}", payload);
 //        TextMessage textMessage = new TextMessage("채팅 서버에 오신 것을 환영합니다.");
 //        session.sendMessage(textMessage);
+
         ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
         ChatRoom room = chatService.findRoomById(chatMessage.getRoomId());
         room.handleActions(session, chatMessage, chatService);
-
     }
 }
+
+
+
+
